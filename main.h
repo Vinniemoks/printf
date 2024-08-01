@@ -1,24 +1,44 @@
-#ifndef main.h
-#define main.h
-#include <stdio.h>
+#ifndef MAIN_H
+#define MAIN_H
+
+#include <unistd.h>
+#include <stdlib.h>
 #include <stdarg.h>
+
 /**
- * struct specifier - struct specifier
- * @valid: the valid character.
- * @f: the functions associated.
+ * struct convert - defines a structure for symbols and functions
  *
+ * @sym: The operator
+ * @f: The function associated
  */
-typedef struct specifier
+struct convert
 {
-	char *valid;
+	char *sym;
 	int (*f)(va_list);
-} spec;
+};
+typedef struct convert conver_t;
+
+/**
+ * Functions
+ */
+int recording_error(const char *format, conver_t f_list[], va_list arg_list);
 int _printf(const char *format, ...);
-int print_c(va_list args);
-int print_s(va_list args);
-int print_d(va_list args);
-int print_i(va_list args);
-int _putchar(char c);
-int print_percent(va_list args);
-int (*get_func(char x))(va_list args);
+int _write_char(char);
+int print_char(va_list);
+int print_string(va_list);
+int print_percent(va_list);
+int print_integer(va_list);
+int print_number(va_list);
+int print_binary(va_list);
+int unsigned_integer(va_list);
+int print_unsgned_number(unsigned int);
+int print_reversed(va_list);
+/**
+ * Suport functions
+ */
+unsigned int base_len(unsigned int, int);
+char *rev_string(char *);
+void write_base(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
+
 #endif
